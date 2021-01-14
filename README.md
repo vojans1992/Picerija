@@ -1,0 +1,2 @@
+# Picerija
+Applikacija za piceriju
