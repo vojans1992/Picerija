@@ -2,10 +2,14 @@ package picerija.web.dto;
 
 import java.util.List;
 
+import picerija.model.Cena;
+
 public class JeloDto {
 
 	private Long id;
 	private String naziv;
+	
+	private List<CenaDto> cene;
 	
 
 	public JeloDto() {
@@ -33,6 +37,14 @@ public class JeloDto {
 
 	public void setNaziv(String naziv) {
 		this.naziv = naziv;
+	}
+
+	public List<CenaDto> getCene() {
+		return cene;
+	}
+
+	public void setCene(List<CenaDto> cene) {
+		this.cene = cene;
 	}
 
 	

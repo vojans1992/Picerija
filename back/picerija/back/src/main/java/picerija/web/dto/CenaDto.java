@@ -1,11 +1,16 @@
 package picerija.web.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class CenaDto {
 
 	private Long id;
 	private String velicina;
 	private Double cena;
+	
+	@NotNull
 	private Long jeloId;
+	
 	private String jeloNaziv;
 	
 	public CenaDto() {

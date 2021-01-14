@@ -3,6 +3,7 @@ package picerija.support;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,8 @@ import picerija.web.dto.JeloDto;
 
 @Component
 public class JeloToJeloDto implements Converter<Jelo, JeloDto>{
+	
+	@Autowired CenaToCenaDto toCenaDto;
 
 	@Override
 	public JeloDto convert(Jelo source) {
@@ -18,6 +21,7 @@ public class JeloToJeloDto implements Converter<Jelo, JeloDto>{
 		JeloDto dto = new JeloDto();
 		dto.setId(source.getId());
 		dto.setNaziv(source.getNaziv());
+		dto.setCene(toCenaDto.convert(source.getCene()));
 		return dto;
 	}
 
