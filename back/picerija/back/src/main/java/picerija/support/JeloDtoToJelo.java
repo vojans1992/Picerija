@@ -20,6 +20,7 @@ public class JeloDtoToJelo implements Converter<JeloDto, Jelo> {
 		Jelo jelo = id == null ? new Jelo() : jeloService.one(id).get();
 		if(jelo != null) {
 			jelo.setNaziv(source.getNaziv());
+			jelo.setSlika(source.getSlika());
 		}
 		return jelo;
 	}

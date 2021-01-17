@@ -9,7 +9,8 @@ class Jela extends React.Component {
 
     let jelo = {
       // default vrednosti od nesto (kao dto klasa)
-      naziv: ""
+      naziv: "",
+      slika: ""
     };
 
     let cena = {
@@ -112,7 +113,7 @@ class Jela extends React.Component {
   async doDelete(jeloId) {
     //brise entitet sa primljenim id-em http metodom delete i dobavlja opet sve entitete bez obrisanog
     try {
-      await PicerijaAxios.delete("/jelo/" + jeloId);
+      await PicerijaAxios.delete("/jela/" + jeloId);
       this.getJela();
     } catch (error) {
       alert("Nije uspelo brisanje.");
@@ -185,6 +186,16 @@ class Jela extends React.Component {
               as="input"
             ></Form.Control>
           </Form.Group>
+          <Form.Group>
+            <Form.Label>Url slike</Form.Label>
+            <Form.Control
+              onChange={(event) => this.addValueInputChange(event)}
+              name="slika"
+              value={this.state.jelo.slika}
+              as="input"
+            ></Form.Control>
+          </Form.Group>
+          
           <Button variant="primary" onClick={() => this.doAdd()}>
             Dodaj
           </Button>
@@ -250,14 +261,14 @@ class Jela extends React.Component {
               return (
                 <tr key={jelo.id}>
                   <td>{jelo.naziv}</td>
-                  <td>{this.state.cene.map((cena)=> {
+                  <td>{jelo.cene.map((cena)=> {
                     return (
                       <p>                   
                         {cena.velicina}  
                       </p>                   
                     )
                   })}</td>
-                  <td>{this.state.cene.map((cena)=> {
+                  <td>{jelo.cene.map((cena)=> {
                     return (
                       <p>                   
                         {cena.cena}  

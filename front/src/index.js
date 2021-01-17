@@ -13,10 +13,10 @@ import { Container, Navbar, Nav, Button, Form, Text, Collapse, Tooltip, Modal,Ta
 import Login from "./components/authentication/Login";
 import { logout } from "./services/auth";
 import Nesto from "./components/zadaci/Komponenta";
-import posna from 'C:/Users/Boki/Desktop/picerija/front/src/slike/posna.jpg'
+import posna from 'C:/Users/Boki/Desktop/picagit/Picerija/front/src/slike/posna.jpg'
 import ModalPoruci from "./components/zadaci/Modal"
-import modalPrviSlika from 'C:/Users/Boki/Desktop/picerija/front/src/slike/drvo2.jpeg'
-import pozadina from 'C:/Users/Boki/Desktop/picerija/front/src/slike/belodrvo.jpeg'
+import modalPrviSlika from 'C:/Users/Boki/Desktop/picagit/Picerija/front/src/slike/drvo2.jpeg'
+import pozadina from 'C:/Users/Boki/Desktop/picagit/Picerija/front/src/slike/belodrvo.jpeg'
 var sectionStyle = {
   backgroundImage: `url(${modalPrviSlika})`
 }

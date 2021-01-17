@@ -1,9 +1,10 @@
 import React from 'react'
 import {Container, Row, Col, Image, Tooltip, Overlay, OverlayTrigger, Modal, Button, Form} from 'react-bootstrap'
-import posna from 'C:/Users/Boki/Desktop/picerija/front/src/slike/posna.jpg'
-import kapricoza from 'C:/Users/Boki/Desktop/picerija/front/src/slike/kapricoza.jpg'
-import madjarica from 'C:/Users/Boki/Desktop/picerija/front/src/slike/madjarica.jpg'
-import pozadina from 'C:/Users/Boki/Desktop/picerija/front/src/slike/belodrvo.jpeg'
+import posna from 'C:/Users/Boki/Desktop/picagit/Picerija/front/src/slike/posna.jpg'
+import kapricoza from 'C:/Users/Boki/Desktop/picagit/Picerija/front/src/slike/kapricoza.jpg'
+import madjarica from 'C:/Users/Boki/Desktop/picagit/Picerija/front/src/slike/madjarica.jpg'
+import pozadina from 'C:/Users/Boki/Desktop/picagit/Picerija/front/src/slike/belodrvo.jpeg'
+import SprintsAxios from 'C:/Users/Boki/Desktop/picagit/Picerija/front/src/apis/SprintsAxios'
 
 var sectionStyle = {
   backgroundImage: `url(${pozadina})`
@@ -38,12 +39,52 @@ class Home extends React.Component {
         naziv: "",
         velicina: "",
       },
-      korpa:[]
+      korpa:[],
+      jela: [],
+      cene: []
     };
   }
 
   componentDidMount(){
     console.log(this.state.jelo)
+    this.getData();
+  }
+
+  async getData() {
+    await this.getJela();
+    await this.getCene();
+  }
+
+  async getJela(page = null) {
+    let config = { params: {} };
+
+    config.params.pageNum = page;
+
+    try {
+      let result = await SprintsAxios.get("/jela", config);
+      if (result && result.status === 200) {
+        this.setState({
+          jela: result.data,
+          totalPages: result.headers["total-pages"],
+        });
+      }
+    } catch (error) {
+      alert("Nije uspelo dobavljanje.");
+    }
+  }
+
+  async getCene() {
+    //kao i dobavljanje za glavnu klasu samo sto ovde nema pretrage
+    try {
+      let result = await SprintsAxios.get("/cene");
+      if (result && result.status === 200) {
+        this.setState({
+          cene: result.data,
+        });
+      }
+    } catch (error) {
+      alert("Nije uspelo dobavljanje.");
+    }
   }
 
   dodajUKorpu(){
@@ -65,7 +106,37 @@ class Home extends React.Component {
 
   render() {
     return (
-      <Container fluid  >
+      <div>
+      <Container fluid>
+          <Row>
+            {this.state.jela.map((jelo) => {
+              return (
+                <Col as="Image">
+                  <Image fluid src={jelo.slika}></Image>
+                    <Form.Group>
+                      <Form.Control style={sectionStyle}
+                        onChange={(event) => this.addValueInputChange(event)}
+                        id="posna"
+                        name="velicina"
+                        as="select"
+                        >
+                        <option value={-1}></option>
+                        {jelo.cene.map((cena) => {
+                          return(
+                            <option value={cena.velicina}>{cena.velicina}{cena.cena}</option>
+                          )
+                        })}
+                      </Form.Control>
+                    </Form.Group>
+                    <Button 
+                      onClick={() => this.dodajUKorpu()}
+                      >
+                      Dodaj u korpu
+                    </Button>
+            </Col>
+        )
+      })}
+        </Row>
         <Row>
           <Col xs={4} as="Image" >
             <OverlayTrigger
@@ -163,7 +234,7 @@ class Home extends React.Component {
         </Row> */}
         
       </Container>
-      
+      </div>
     )
   }
 }

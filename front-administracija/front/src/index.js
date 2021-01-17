@@ -13,6 +13,7 @@ import { Container, Navbar, Nav, Button, Form } from "react-bootstrap";
 import Login from "./components/authentication/Login";
 import { logout } from "./services/auth";
 import Jela from "./components/picerija/Jela";
+import Cene from "./components/picerija/Cene";
 
 class App extends React.Component {
   render() {
@@ -26,9 +27,14 @@ class App extends React.Component {
               <Navbar.Brand as={Link} to="/">
                 Al Tuo Posto
               </Navbar.Brand>
+              <Nav>
+                <Nav.Link as={Link} to="/jela">
+                  Jela
+                </Nav.Link>
+              </Nav>
               <Nav className="mr-auto">
-                <Nav.Link as={Link} to="/komponente">
-                  Jela I Cene
+                <Nav.Link as={Link} to="/cene">
+                  Cene
                 </Nav.Link>
               </Nav>
 
@@ -45,7 +51,8 @@ class App extends React.Component {
             <Container style={{marginTop:25}}>
               <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/komponente" component={Jela} />
+                <Route exact path="/jela" component={Jela} />
+                <Route exact path="/cene" component={Cene} />
                 <Route exact path="/login">
                   <Redirect to="/"></Redirect>
                 </Route>

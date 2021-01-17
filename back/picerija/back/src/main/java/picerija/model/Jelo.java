@@ -15,6 +15,9 @@ public class Jelo {
 	@Column
 	private String naziv;
 	
+	@Column
+	private String slika;
+	
 	@OneToMany(mappedBy="jelo", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Cena> cene = new ArrayList<>();
 
@@ -23,11 +26,20 @@ public class Jelo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Jelo(Long id, String naziv, List<Cena> cene) {
+	public Jelo(Long id, String naziv, String slika, List<Cena> cene) {
 		super();
 		this.id = id;
 		this.naziv = naziv;
+		this.slika = slika;
 		this.cene = cene;
+	}
+
+	public String getSlika() {
+		return slika;
+	}
+
+	public void setSlika(String slika) {
+		this.slika = slika;
 	}
 
 	public Long getId() {

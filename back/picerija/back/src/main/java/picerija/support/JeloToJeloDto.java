@@ -21,6 +21,7 @@ public class JeloToJeloDto implements Converter<Jelo, JeloDto>{
 		JeloDto dto = new JeloDto();
 		dto.setId(source.getId());
 		dto.setNaziv(source.getNaziv());
+		dto.setSlika(source.getSlika());
 		dto.setCene(toCenaDto.convert(source.getCene()));
 		return dto;
 	}

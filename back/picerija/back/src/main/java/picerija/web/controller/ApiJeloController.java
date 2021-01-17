@@ -1,6 +1,7 @@
 package picerija.web.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -43,6 +44,15 @@ public class ApiJeloController {
 		return new ResponseEntity<>(toDto.convert(page.getContent()), HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<JeloDto> getOne(@PathVariable Long id){
+		Optional<Jelo> jelo = jeloService.one(id);
+		if(jelo.isPresent() != true) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(toDto.convert(jelo.get()), HttpStatus.OK);
+	}
 	
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<JeloDto> add(@Validated @RequestBody JeloDto dto){
@@ -61,7 +71,7 @@ public class ApiJeloController {
 		return new ResponseEntity<>(toDto.convert(persisted), HttpStatus.OK);
 	}
 	
-	@DeleteMapping("{/id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<JeloDto> delete (@PathVariable Long id){
 		Jelo deleted = jeloService.delete(id);
 		
