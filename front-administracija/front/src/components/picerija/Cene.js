@@ -106,6 +106,7 @@ class Cene extends React.Component {
         async doDelete(cenaId) {
           //brise entitet sa primljenim id-em http metodom delete i dobavlja opet sve entitete bez obrisanog
           try {
+            console.log(cenaId)
             await PicerijaAxios.delete("/cene/" + cenaId);
             this.getCene();
           } catch (error) {

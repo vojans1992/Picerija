@@ -12,7 +12,6 @@ import NotFound from "./components/NotFound";
 import { Container, Navbar, Nav, Button, Form, Text, Collapse, Tooltip, Modal,Table, Col} from "react-bootstrap";
 import Login from "./components/authentication/Login";
 import { logout } from "./services/auth";
-import Nesto from "./components/zadaci/Komponenta";
 import posna from 'C:/Users/Boki/Desktop/picagit/Picerija/front/src/slike/posna.jpg'
 import ModalPoruci from "./components/zadaci/Modal"
 import modalPrviSlika from 'C:/Users/Boki/Desktop/picagit/Picerija/front/src/slike/drvo2.jpeg'
@@ -40,6 +39,9 @@ class App extends React.Component {
         naselje: "",
         telefon: "",
       },
+      jeloKorpa:{
+
+      },
       korpa:[]
     };
     this.handleShow = this.handleShow.bind(this);
@@ -61,6 +63,7 @@ class App extends React.Component {
 
   handleShowKorpa() {
     this.setState({showKorpa: true});
+    console.log(Home.state.korpa)
   }
 
   handleCloseKorpa() {
@@ -78,6 +81,7 @@ class App extends React.Component {
 
     this.setState({ podaci: podaci });
   }
+
 
   sacuvajPodatke(){
     this.handleClose()
@@ -177,11 +181,16 @@ class App extends React.Component {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Posna</td>
-                          <td>Mala</td>
-                          <td>320 din</td>
-                        </tr>
+
+                        {/* {this.state.korpa.cene.map((korpa) => {
+                          return(
+                            <tr key={korpa.id}>
+                              <td>{korpa.naziv}</td>
+                              <td>{korpa.velicina}</td>
+                              <td>{korpa.cena}</td>
+                            </tr>
+                          )
+                        })} */}
                       </tbody>
                     </Table>
                     <Button variant="primary" onClick={() => this.sacuvajPodatke()}>
@@ -230,3 +239,5 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.querySelector("#root"));
+
+export default App;

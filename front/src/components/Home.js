@@ -5,6 +5,7 @@ import kapricoza from 'C:/Users/Boki/Desktop/picagit/Picerija/front/src/slike/ka
 import madjarica from 'C:/Users/Boki/Desktop/picagit/Picerija/front/src/slike/madjarica.jpg'
 import pozadina from 'C:/Users/Boki/Desktop/picagit/Picerija/front/src/slike/belodrvo.jpeg'
 import SprintsAxios from 'C:/Users/Boki/Desktop/picagit/Picerija/front/src/apis/SprintsAxios'
+import App from 'C:/Users/Boki/Desktop/picagit/Picerija/front/src/index'
 
 var sectionStyle = {
   backgroundImage: `url(${pozadina})`
@@ -36,13 +37,18 @@ class Home extends React.Component {
     super(props);
     this.state = {
       jelo: {
-        naziv: "",
-        velicina: "",
+        cena: {}
       },
       korpa:[],
       jela: [],
       cene: []
     };
+  }
+
+  dodajUKorpu(jelo){
+    
+    this.state.korpa.push(jelo)
+    console.log(this.state.korpa)
   }
 
   componentDidMount(){
@@ -87,8 +93,6 @@ class Home extends React.Component {
     }
   }
 
-  dodajUKorpu(){
-  }
 
   addValueInputChange(event) {
     let control = event.target;
@@ -98,10 +102,9 @@ class Home extends React.Component {
 
     let jelo = this.state.jelo;
     jelo[name] = value;
-    jelo.naziv = event.target.id
 
+    console.log(jelo)
     this.setState({ jelo: jelo });
-    console.log(this.state.jelo)
   }
 
   render() {
@@ -116,28 +119,28 @@ class Home extends React.Component {
                     <Form.Group>
                       <Form.Control style={sectionStyle}
                         onChange={(event) => this.addValueInputChange(event)}
-                        id="posna"
-                        name="velicina"
+                        id={jelo.id}
+                        name="cena"
                         as="select"
                         >
                         <option value={-1}></option>
                         {jelo.cene.map((cena) => {
                           return(
-                            <option value={cena.velicina}>{cena.velicina}{cena.cena}</option>
+                            <option value={cena}>{cena.velicina} cena:{cena.cena}</option>
                           )
                         })}
                       </Form.Control>
                     </Form.Group>
                     <Button 
-                      onClick={() => this.dodajUKorpu()}
+                      onClick={() => this.dodajUKorpu(this.state.jelo)}
                       >
                       Dodaj u korpu
                     </Button>
-            </Col>
+                </Col>
         )
       })}
         </Row>
-        <Row>
+        {/* <Row>
           <Col xs={4} as="Image" >
             <OverlayTrigger
             placement="right"
@@ -219,7 +222,7 @@ class Home extends React.Component {
                 Dodaj u korpu
             </Button>
             </Col>
-        </Row>
+        </Row> */}
         {/* <Row>
           <Col >
             Kapricoza
